@@ -1,23 +1,72 @@
 {
-  "schema_version": "v1",
-  "name_for_human": "Microsoft Graph Assistant",
-  "name_for_model": "microsoft_graph_assistant",
-  "description_for_human": "Hae sähköposteja, kalenteritapahtumia ja tiedostoja Microsoft 365 -tililtäsi.",
-  "description_for_model": "Plugin for accessing Outlook emails, calendar events, and OneDrive files using Microsoft Graph API.",
-  "auth": {
-    "type": "oauth",
-    "client_url": "https://login.microsoftonline.com/common/oauth2/v2.0/authorize",
-    "scope": "https://graph.microsoft.com/.default offline_access openid profile email",
-    "authorization_url": "https://login.microsoftonline.com/common/oauth2/v2.0/authorize",
-    "token_url": "https://login.microsoftonline.com/common/oauth2/v2.0/token",
-    "client_id": "REPLACE_WITH_YOUR_CLIENT_ID",
-    "client_secret": "REPLACE_WITH_YOUR_CLIENT_SECRET"
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Microsoft Graph Plugin",
+    "description": "API for accessing Microsoft 365 Outlook mail, calendar, and OneDrive files.",
+    "version": "1.0.0"
   },
-  "api": {
-    "type": "openapi",
-    "url": "https://jhlstudio.github.io/gpt-msgraph/openapi.json"
+  "servers": [
+    {
+      "url": "https://graph.microsoft.com/v1.0"
+    }
+  ],
+  "paths": {
+    "/me/messages": {
+      "get": {
+        "summary": "Get Outlook Emails",
+        "operationId": "getEmails",
+        "tags": ["Mail"],
+        "responses": {
+          "200": {
+            "description": "A list of email messages."
+          }
+        }
+      }
+    },
+    "/me/events": {
+      "get": {
+        "summary": "Get Calendar Events",
+        "operationId": "getCalendarEvents",
+        "tags": ["Calendar"],
+        "responses": {
+          "200": {
+            "description": "A list of calendar events."
+          }
+        }
+      }
+    },
+    "/me/drive/root/children": {
+      "get": {
+        "summary": "Get OneDrive Files",
+        "operationId": "getOneDriveFiles",
+        "tags": ["Files"],
+        "responses": {
+          "200": {
+            "description": "A list of OneDrive files."
+          }
+        }
+      }
+    }
   },
-  "logo_url": "https://jhlstudio.github.io/gpt-msgraph/logo.png",
-  "contact_email": "admin@jhlstudio.com",
-  "legal_info_url": "https://jhlstudio.github.io/gpt-msgraph/legal"
+  "components": {
+    "securitySchemes": {
+      "OAuth2": {
+        "type": "oauth2",
+        "flows": {
+          "authorizationCode": {
+            "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/v2.0/authorize",
+            "tokenUrl": "https://login.microsoftonline.com/common/oauth2/v2.0/token",
+            "scopes": {
+              "https://graph.microsoft.com/.default": "Full access to Microsoft Graph resources"
+            }
+          }
+        }
+      }
+    }
+  },
+  "security": [
+    {
+      "OAuth2": ["https://graph.microsoft.com/.default"]
+    }
+  ]
 }
