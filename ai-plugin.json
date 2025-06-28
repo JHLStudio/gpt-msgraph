@@ -1,0 +1,23 @@
+{
+  "schema_version": "v1",
+  "name_for_human": "Microsoft Graph Assistant",
+  "name_for_model": "microsoft_graph_assistant",
+  "description_for_human": "Hae sähköposteja, kalenteritapahtumia ja tiedostoja Microsoft 365 -tililtäsi.",
+  "description_for_model": "Plugin for accessing Outlook emails, calendar events, and OneDrive files using Microsoft Graph API.",
+  "auth": {
+    "type": "oauth",
+    "client_url": "https://login.microsoftonline.com/common/oauth2/v2.0/authorize",
+    "scope": "https://graph.microsoft.com/.default offline_access openid profile email",
+    "authorization_url": "https://login.microsoftonline.com/common/oauth2/v2.0/authorize",
+    "token_url": "https://login.microsoftonline.com/common/oauth2/v2.0/token",
+    "client_id": "REPLACE_WITH_YOUR_CLIENT_ID",
+    "client_secret": "REPLACE_WITH_YOUR_CLIENT_SECRET"
+  },
+  "api": {
+    "type": "openapi",
+    "url": "https://jhlstudio.github.io/gpt-msgraph/openapi.json"
+  },
+  "logo_url": "https://jhlstudio.github.io/gpt-msgraph/logo.png",
+  "contact_email": "admin@jhlstudio.com",
+  "legal_info_url": "https://jhlstudio.github.io/gpt-msgraph/legal"
+}
